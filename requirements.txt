@@ -1,3 +1,4 @@
 pandas
 scipy
 streamlit
+streamlit==1.60.0
