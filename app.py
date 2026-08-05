@@ -45,6 +45,8 @@ def data_prep(path: str = "vehicles_us.csv") -> pd.DataFrame:
 
     df['age'] = 2020 - df['model_year']
 
+    df = df.query('price > 1')
+
     return df
 
 
@@ -53,20 +55,33 @@ def gen_plots(df,control: ControlFlags):
     histo = None
 
     if control.show_scatter:
-        scatter = px.scatter(df, x='odometer', y='price', color='brand')
-        #st.write("make a scatter plot.")
+        scatter = px.scatter(df,
+                             x='odometer',
+                             y='price',
+                             log_y=True,
+                             labels={'odometer':'Odómetro','price':'log(Precio [USD])'},
+                             color='brand',
+                             title='Odómetro vs Precio (escala log)',
+                             subtitle='Segregado por marca. Valores ficticios (p. ej. $1.00) excluidos'
+                             )
     if control.show_histo:
-        histo = px.histogram(df, x='price', nbins=60, color='condition')
-        #st.write("make a histogram.")
+        histo = px.histogram(df,
+                             x='price',
+                             labels={'price':'Precio [USD]'},
+                             nbins=60,
+                             color='condition',
+                             title='Distribución de precios',
+                             subtitle='Segregado por condición. Valores ficticios (p. ej. $1.00) excluidos'
+                             )
 
     return (scatter, histo)
 
 st.title("Sprint 7: Proyecto")
 st.write("Desarrollo de app en streamlit, despliege en Render.")
+st.write("Tema: Análisis de mercado: vehículos usados.")
 
-show_scatter = st.checkbox("Generate Scatter Plot")
-show_histo = st.checkbox("Generate Histogram")
-
+show_scatter = st.checkbox("Generar gráfico de dispersión")
+show_histo = st.checkbox("Generar histograma")
 
 dataset = data_prep()
 flags = ControlFlags(show_scatter, show_histo)

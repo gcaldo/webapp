@@ -40,5 +40,5 @@ Then choose **Python (webapp)** as the notebook kernel.
 
 ```bash
 conda activate webapp
-streamlit run test_app.py
+streamlit run app.py
 ```
