@@ -1,6 +1,17 @@
 # webapp
 This is the repository of my first ever web application.
 
+## Live demo
+
+Deployed on [Render](https://render.com): **[https://webapp-8ze9.onrender.com](https://webapp-8ze9.onrender.com)**
+
+## Program design
+
+The Streamlit app was designed with the six-step recipe from
+[*How to Design Programs*](https://htdp.org/). See **[DESIGN.md](DESIGN.md)**
+for data definitions, signatures, examples, templates, and how they map onto
+`app.py`.
+
 ## Setup
 
 ### Conda / Anaconda / Miniforge
